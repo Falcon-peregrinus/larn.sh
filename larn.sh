@@ -4,8 +4,8 @@ SAVEDIR="$HOME/.larn/save/"
 SCOREDIR="$HOME/.larn/score/"
 TMPDIR="/tmp/larn"
 DATADIR="$TMPDIR/data"
-SAVEFILE="$SAVEDIR/savefile.txt"
-SCOREFILE="$SCOREDIR/scorefile.txt"
+SAVEFILE="$SAVEDIR/savefile.dat"
+SCOREFILE="$SCOREDIR/scorefile.dat"
 echo "Running wrapper..."
 if pgrep "^larn$" >/dev/null
 then
@@ -24,14 +24,14 @@ if [ ! -d "$SCOREDIR" ]; then
 	mkdir -p "$SCOREDIR";
 fi
 if [ -f "$SCOREFILE" ]; then
-	mv "$SCOREFILE" $DATADIR/;
+	mv "$SCOREFILE" $DATADIR;
 fi
 cd $TMPDIR
 ./larn "$@"
-if [ -f data/savefile.txt ]; then
-	cp data/savefile.txt "$SAVEDIR"
+if [ -f data/savefile.dat ]; then
+	cp data/savefile.dat "$SAVEDIR"
 fi
-cp data/scorefile.txt "$SCOREDIR"
+cp data/scorefile.dat "$SCOREDIR"
 cd $OLDPWD
 rm -rf $TMPDIR
 echo "Exiting wrapper..."
